@@ -7,13 +7,13 @@
 	CREATE TABLE usuarios.Usuarios (
 	    cedula TEXT PRIMARY KEY,
 	    nombre TEXT NOT NULL,
-	    permiso TEXT DEFAULT 'user',
+	    permisos TEXT DEFAULT 'user',
 	    password TEXT NOT NULL,
 	    calle TEXT NOT NULL,
 	    carrera TEXT NOT NULL,
 	    estado BOOLEAN DEFAULT TRUE,
 	    correo TEXT NOT NULL UNIQUE,
-	    id_admin TEXT NOT NULL
+	    id_admin TEXT NULL 
 	);
 	
 	CREATE TABLE usuarios.Telefonos (
@@ -35,15 +35,15 @@
 	);
 	
 	CREATE TABLE pacientes.Historia_clinica (
-	    id_historial TEXT PRIMARY KEY,
+	    id_historial UUID PRIMARY KEY,
 	    fecha_inicio DATE NOT NULL,
 	    cedula TEXT NOT NULL,
 	    FOREIGN KEY (cedula) REFERENCES pacientes.Pacientes(cedula)
 	);
 	
 	CREATE TABLE pacientes.Registro (
-	    id_registro TEXT PRIMARY KEY,
-	    id_historial TEXT NOT NULL,
+	    id_registro UUID PRIMARY KEY,
+	    id_historial UUID NOT NULL,
 	    fecha DATE NOT NULL,
 	    descripcion TEXT NOT NULL,
 	    FOREIGN KEY (id_historial) REFERENCES pacientes.Historia_clinica(id_historial)
@@ -55,7 +55,7 @@
 	CREATE SCHEMA IF NOT EXISTS empleados;
 	
 	CREATE TABLE empleados.Empleados (
-	    id_empleado TEXT PRIMARY KEY,
+	    id_empleado UUID PRIMARY KEY,
 	    fecha_ingreso DATE NOT NULL,
 	    salario NUMERIC NOT NULL,
 	    hora_inicio TIME NOT NULL,
@@ -65,14 +65,14 @@
 	);
 	
 	CREATE TABLE empleados.Medicos (
-	    id_empleado TEXT PRIMARY KEY,
-	    especialidad TEXT NOT NULL,
+	    id_empleado UUID PRIMARY KEY,
+	    departamento TEXT NOT NULL,
 	    registro_medico TEXT NOT NULL,
 	    FOREIGN KEY (id_empleado) REFERENCES empleados.Empleados(id_empleado)
 	);
 	
 	CREATE TABLE empleados.Administrativos (
-	    id_empleado TEXT PRIMARY KEY,
+	    id_empleado UUID PRIMARY KEY,
 	    cargo_admin TEXT NOT NULL,
 	    FOREIGN KEY (id_empleado) REFERENCES empleados.Empleados(id_empleado)
 	);

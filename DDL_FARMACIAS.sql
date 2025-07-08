@@ -1,16 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS farmacias;
 
 	CREATE TABLE farmacias.Farmacias (
-	    id_farmacia TEXT PRIMARY KEY,
+	    id_farmacia SERIAL PRIMARY KEY,
 	    telefono TEXT NOT NULL,
 	    nombre TEXT NOT NULL,
 	    calle TEXT NOT NULL,
 	    carrera TEXT NOT NULL
 	);
 	CREATE TABLE farmacias.Farmaceuticos(
-		cedula TEXT NOT NULL PRIMARY KEY,-- REFERENCES usuarios.usuarios(cedula),
+		cedula TEXT NOT NULL PRIMARY KEY,
 		licencia TEXT NOT NULL UNIQUE,
 		id_farmacia TEXT REFERENCES farmacias.Farmacias(id_farmacia)
+		--FOREIGN KEY (cedula) REFERENCES usuarios.usuarios(cedula),
 	);
 	
 	
@@ -23,8 +24,8 @@ CREATE SCHEMA IF NOT EXISTS farmacias;
 	);
 	
 	CREATE TABLE farmacias.Farmacias_Medicamentos (
-	    id_farmacia TEXT NOT NULL,
-	    id_medicamento TEXT NOT NULL,
+	    id_farmacia INTEGER NOT NULL,
+	    id_medicamento UUID NOT NULL,
 	    lote TEXT NOT NULL,
 	    stock INT NOT NULL,
 	    PRIMARY KEY (id_farmacia, id_medicamento, lote),
@@ -33,11 +34,12 @@ CREATE SCHEMA IF NOT EXISTS farmacias;
 	);
 	
 	CREATE TABLE farmacias.Adquiere (
-	    id_compra TEXT PRIMARY KEY,
+	    id_compra SERIAL PRIMARY KEY,
 	    cedula TEXT NOT NULL, -- REFERENCES pacientes.Pacientes(cedula),
-	    id_medicamento TEXT REFERENCES farmacias.Medicamentos(id_medicamento),
-	    id_farmacia TEXT REFERENCES farmacias.Farmacias(id_farmacia),
+	    id_medicamento UUID REFERENCES farmacias.Medicamentos(id_medicamento),
+	    id_farmacia INTEGER REFERENCES farmacias.Farmacias(id_farmacia),
 	    hora TIME NOT NULL,
+		fecha DATE NOT NULL,
 	    precio_total NUMERIC NOT NULL,
 	    cantidad INT NOT NULL
 	);
