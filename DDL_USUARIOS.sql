@@ -13,6 +13,7 @@
 	    carrera TEXT NOT NULL,
 	    estado BOOLEAN DEFAULT TRUE,
 	    correo TEXT NOT NULL UNIQUE,
+		fecha_expedicion TEXT NOT NULL,
 	    id_admin TEXT NULL 
 	);
 	
