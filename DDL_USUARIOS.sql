@@ -1,3 +1,4 @@
+CREATE DATABASE gestion_usuarios;
 -- ==========================
 -- ESQUEMA: usuarios
 -- ==========================

@@ -1,4 +1,7 @@
+CREATE DATABASE gestion_farmacias;
+
 CREATE SCHEMA IF NOT EXISTS farmacias;
+
 
 	CREATE TABLE farmacias.Farmacias (
 	    id_farmacia SERIAL PRIMARY KEY,
